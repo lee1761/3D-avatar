@@ -37,6 +37,17 @@ using IBM.Cloud.SDK.DataTypes;
 
 public class SpeechToText : MonoBehaviour
 {
+
+    Animator anim;
+    bool hDown;
+
+
+    void Awake()
+    {
+        anim = GetComponentInChildren<Animator>();
+    }
+
+
     [SerializeField]
     private WatsonSettings settings;
 
@@ -130,6 +141,10 @@ public class SpeechToText : MonoBehaviour
     private InputField outputInputField;
     private Text outputText;
 
+    private string str;
+    private string str1;
+
+
     private void Start()
     {
         Debug.Log(gameObject.GetComponent<SpeechToText>().settings);
@@ -151,6 +166,8 @@ public class SpeechToText : MonoBehaviour
         {
 
         }
+
+
 
         // Active = false;
 
@@ -195,6 +212,7 @@ public class SpeechToText : MonoBehaviour
     public string GetResult()
     {
         status = ProcessingStatus.Idle;
+       
         return spokenText.text;
     }
 
@@ -324,7 +342,10 @@ public class SpeechToText : MonoBehaviour
                 {
                     //string text = string.Format("{0} ({1}, {2:0.00})\n", alt.transcript, res.final ? "Final" : "Interim", alt.confidence);
                     string text = string.Format("{0}", alt.transcript);
+
                     Log.Debug("SpeechInput.OnRecognize()", text);
+
+                
 
                     //Once the phrase of speech is final, set the results field to the final text.
                     //Set the processing status to show that it has been processed.
@@ -333,10 +354,17 @@ public class SpeechToText : MonoBehaviour
                         if (spokenText != null)
                         {
                             spokenText.text = text;
+
+                            string str = "hii how are you";
+                            string srt1 = str.Substring(0,2);
+                            Debug.Log("str1:"+str1);
+
+
                         }
                         if (targetInputField != null)
                         {
                             targetInputField.text = text;
+                           
                         }
                         if (targetGameObject != null)
                         {
@@ -370,6 +398,13 @@ public class SpeechToText : MonoBehaviour
             }
         }
     }
+
+    void Update()
+    {
+
+    }
+
+
 
     private void OnRecognizeSpeaker(SpeakerRecognitionEvent result)
     {

@@ -35,6 +35,17 @@ using UnityEngine.UI;
 
 public class SimpleBot : MonoBehaviour
 {
+
+    Animator anim;
+    bool hDown;
+
+
+     void Awake()
+    {
+        anim = GetComponentInChildren<Animator>();
+    }
+
+
     [SerializeField]
     private WatsonSettings settings;
 
@@ -68,6 +79,8 @@ public class SimpleBot : MonoBehaviour
     private InputFieldTrigger externalTriggerType;
 
     private InputField inputField;
+
+    private string str;
 
     // The output target GameObject to receive text from this gameObject.
     [SerializeField]
@@ -113,7 +126,10 @@ public class SimpleBot : MonoBehaviour
         if (targetText != null && textResponse != null)
         {
             targetText.text = textResponse;
+
         }
+
+        
     }
 
     public IEnumerator CreateService()
@@ -176,6 +192,7 @@ public class SimpleBot : MonoBehaviour
     public void GetChatResponse(string chatInput)
     {
         StartCoroutine(ProcessChat(chatInput));
+
     }
 
     public IEnumerator ProcessChat(string chatInput)
