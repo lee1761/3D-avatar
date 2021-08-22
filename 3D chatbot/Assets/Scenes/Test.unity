@@ -948,6 +948,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1240343127}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1240343131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240343130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ace26c742e68341a58eee79edd0ee986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &1240343132
 Animator:
   serializedVersion: 3
@@ -967,24 +979,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1240343133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1240343130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ef0d17b7b4bd4c478ab7a86d6fd0ef6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 3f813d8bd389cab4db095af6fb7b02b5, type: 2}
-  model: 5
-  spokenText: {fileID: 0}
-  targetInputField: {fileID: 0}
-  targetGameObject: {fileID: 246079264}
-  outputInputField: {fileID: 0}
 --- !u!82 &1240343134
 AudioSource:
   m_ObjectHideFlags: 0

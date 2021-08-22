@@ -2,37 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using static SpeechToText;
+
+
 public class AvatarController : MonoBehaviour
 {
 
-	Animator anim;
-	bool hDown;
-    bool jDown;
-    bool isHello;
+   private Animator anim;
 
+    SpeechToText stt = new SpeechToText();
+    string a;
 
-    // Start is called before the first frame update
+	void Awake()
+	{
+    	anim = GetComponentInChildren<Animator>();
+	}
+
     void Start()
     {
-        
-    }
-
-
-    void Awake()
-    {
-    	anim = GetComponentInChildren<Animator>();
+         a = stt.outText;
     }
 
     // Update is called once per frame
     void Update()
     {
-        jDown = Input.GetButtonDown("HelloHello");
-        if(jDown)
+        if(a.Equals("hi how are you "))
         {
-            anim.SetTrigger("doHello");
+        	Debug.Log("hooooh");
+            //anim.SetTrigger("Hello");
         }
     }
-
-
+   
 }
-
