@@ -16,7 +16,7 @@ MonoBehaviour:
   serviceUrl: https://api.au-syd.assistant.watson.cloud.ibm.com/instances/1b9664e1-9a5e-45f4-918a-dba44978d7af
   versionDate: 2020-09-24
   assistantId: 70425d44-212e-4f7b-8ad9-e04766c8762b
-  tts_apikey: yzJ1tPIovb7DbyQFNAix5VvkFrq6XB_2bj3zB7Fk8gzG
-  tts_serviceUrl: https://api.au-syd.text-to-speech.watson.cloud.ibm.com/instances/ca6ef036-2b6c-4d19-831b-52d4150f26ee
+  tts_apikey: J0q5OVsboXNZNPpTONuVsvyPyvtwXPvFjgX-T_4qjQYS
+  tts_serviceUrl: https://api.au-syd.text-to-speech.watson.cloud.ibm.com/instances/2245265a-78da-4987-a736-cd33e2fc139f
   stt_apikey: Gu5zRvlEFOivUWXzSJmhJWJeiqI9JvFcdgAPkhqHZLxz
   stt_serviceUrl: https://api.au-syd.speech-to-text.watson.cloud.ibm.com/instances/d0484381-63a5-4913-a4a6-cf778e2d245f

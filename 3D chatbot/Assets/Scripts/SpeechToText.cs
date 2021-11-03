@@ -35,10 +35,16 @@ using IBM.Cloud.SDK.Authentication.Iam;
 using IBM.Cloud.SDK.Utilities;
 using IBM.Cloud.SDK.DataTypes;
 
+using System;
+using System.Timers;
+using System.Threading;
+
+
 public class SpeechToText : MonoBehaviour
 {
+   private Animator Anim;
 
-    public string outText;
+    public static string outText;
     
     [SerializeField]
     private WatsonSettings settings;
@@ -136,12 +142,13 @@ public class SpeechToText : MonoBehaviour
     private Text outputText;
 
 
-    
+    private void Awake()
+    {
+        Anim = GetComponentInChildren<Animator>();
+    }
 
     private void Start()
     {
-
-
 
         Debug.Log(gameObject.GetComponent<SpeechToText>().settings);
         LogSystem.InstallDefaultReactors();
@@ -195,6 +202,7 @@ public class SpeechToText : MonoBehaviour
 
     public bool ServiceReady()
     {
+        
         return _service != null;
     }
 
@@ -206,7 +214,21 @@ public class SpeechToText : MonoBehaviour
     public string GetResult()
     {
         status = ProcessingStatus.Idle;
+        
+
         return spokenText.text;
+    }
+
+    public void AddResult()
+    {
+         spokenText.text += " ";
+    }
+
+    public void SetText()
+    {
+
+        //spokenText.text = "hi how are you";
+        spokenText.text = spokenText.text.Substring(0,spokenText.text.Length-1);
     }
 
     public bool Active
@@ -338,6 +360,18 @@ public class SpeechToText : MonoBehaviour
                     //string text = string.Format("{0} ({1}, {2:0.00})\n", alt.transcript, res.final ? "Final" : "Interim", alt.confidence);
                     string text = string.Format("{0}", alt.transcript);
                     Log.Debug("SpeechInput.OnRecognize()", text);
+
+
+
+                    if(outText.Equals("hi how are you "))
+                    {
+                        //Debug.Log("Yes");
+                        //Anim.SetTrigger("doHello");
+                        //Anim.Play("Hello",-1,0f);
+                    }
+
+
+                    Debug.Log("text: " + text);
 
                     //Once the phrase of speech is final, set the results field to the final text.
                     //Set the processing status to show that it has been processed.

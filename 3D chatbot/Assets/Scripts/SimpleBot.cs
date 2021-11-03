@@ -36,6 +36,9 @@ using UnityEngine.UI;
 public class SimpleBot : MonoBehaviour
 {
     [SerializeField]
+    private Touchable touch;
+
+    [SerializeField]
     private WatsonSettings settings;
 
     private AssistantService Assistant_service;
@@ -110,6 +113,8 @@ public class SimpleBot : MonoBehaviour
 
     private void Update()
     {
+
+       
         if (targetText != null && textResponse != null)
         {
             targetText.text = textResponse;
@@ -238,6 +243,8 @@ public class SimpleBot : MonoBehaviour
         {
             textResponse = "I don't know how to respond to that.";
         }
+
+       
         else
         {
             textResponse = response.Result.Output.Generic[0].Text.ToString();

@@ -7,30 +7,111 @@ using static SpeechToText;
 
 public class AvatarController : MonoBehaviour
 {
+    public Transform Hand;
+    bool attemptingShake = false;
+    public Transform UserHand;
 
-   private Animator anim;
+    private Animator anim1;
+    bool hDown;
+    bool isHello;
 
-    SpeechToText stt = new SpeechToText();
-    string a;
+    [SerializeField]
+    private SpeechToText stt; // IBM Watson Speech to Text gameobject
 
-	void Awake()
-	{
-    	anim = GetComponentInChildren<Animator>();
-	}
 
-    void Start()
+    [SerializeField]
+    private TextToSpeech tts; // IBM Watson Speech to Text gameobject
+
+
+    void Awake()
     {
-         a = stt.outText;
+        anim1 = GetComponentInChildren<Animator>();
+    }
+
+    static void Start()
+    {
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(a.Equals("hi how are you "))
+        hDown = Input.GetButtonDown("Hello");
+
+        /*
+        if (hDown)
         {
-        	Debug.Log("hooooh");
-            //anim.SetTrigger("Hello");
+            anim1.SetTrigger("doHello");
+
         }
+        */
+        
+
+        if (stt.GetResult() == "hi how are you ")
+        {
+
+            anim1.SetTrigger("doHello");
+            //anim1.Play("Hello",-1,0f);
+            stt.SetText();
+
+        }
+
+
+
+        if (stt.GetResult() == "nice to meet you " || hDown)
+        {
+
+            anim1.SetTrigger("doNice");
+            //anim1.Play("Hello",-1,0f);
+            //attemptingShake = true;
+            
+
+            stt.SetText();
+
+        }
+
+
+
+        if (stt.GetResult() == "hi 5 " || stt.GetResult() == "High-Five! " || hDown)
+        {
+
+            anim1.SetTrigger("doHighfive");
+            //anim1.Play("Hello",-1,0f);
+            //attemptingShake = true;
+
+
+            stt.SetText();
+
+        }
+
+
+
+
+        if (tts.GetResult() == "Don't touch me")
+        {
+
+            //anim1.SetTrigger("doHello");
+            anim1.SetTrigger("doUnTouchable");
+
+           
+            tts.SetText();
+
+        }
+
+
+        
+        if (attemptingShake)
+        {
+            Hand.position = Vector3.Lerp(Hand.position, UserHand.position, Time.deltaTime/10f);
+
+            if (UserHand.position == Hand.position)
+            {
+                attemptingShake = false;
+            }
+        }
+        
+
+
     }
-   
+
 }

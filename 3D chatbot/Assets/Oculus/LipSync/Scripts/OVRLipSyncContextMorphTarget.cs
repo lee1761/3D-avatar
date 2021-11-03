@@ -164,9 +164,7 @@ public class OVRLipSyncContextMorphTarget : MonoBehaviour
             if (visemeToBlendTargets[i] != -1)
             {
                 // Viseme blend weights are in range of 0->1.0, we need to make range 100
-                skinnedMeshRenderer.SetBlendShapeWeight(
-                    visemeToBlendTargets[i],
-                    frame.Visemes[i] * 100.0f);
+                skinnedMeshRenderer.SetBlendShapeWeight(visemeToBlendTargets[i], frame.Visemes[i] * 100.0f);
             }
         }
     }

@@ -33,12 +33,34 @@ using IBM.Cloud.SDK.Authentication.Iam;
 using IBM.Cloud.SDK.Utilities;
 using IBM.Watson.TextToSpeech.V1;
 
+
+using System.Threading.Tasks;
+
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Security.Cryptography.X509Certificates;
 
 public class TextToSpeech : MonoBehaviour
 {
+
+    [SerializeField]
+    private Text additionalText;
+
+    [SerializeField]
+    private AppManager app;
+
+    [SerializeField]
+    private IPGrabber ip;
+
+    public string weatherStatus, TempStatus;
+
+    [SerializeField]
+    private Touchable touch;
+
+
     [SerializeField]
     private WatsonSettings settings;
 
@@ -162,9 +184,14 @@ public class TextToSpeech : MonoBehaviour
     [SerializeField]
     private InputFieldTrigger externalTriggerType;
 
+    string nextText = String.Empty;
+
     //[SerializeField]
     private InputField inputField;
 
+    private bool touched = false;
+    private float touchTimer = 0;
+    public float delayBetweenTouches = 10;
     private void Start()
     {
         audioStatus = ProcessingStatus.Idle;
@@ -172,6 +199,7 @@ public class TextToSpeech : MonoBehaviour
         Runnable.Run(CreateService());
 
         // Get or make the AudioSource for playing the speech
+
         if (outputAudioSource == null)
         {
             gameObject.AddComponent<AudioSource>();
@@ -184,12 +212,17 @@ public class TextToSpeech : MonoBehaviour
         // as obtaining a chat response from IBM Assistant was still being processed
         // or was finished processing but this was cumbersome.
 
+
+
+
         if (externalInputField != null)
         {
             if (externalTriggerType == InputFieldTrigger.onEndEdit)
             {
                 externalInputField.onEndEdit.AddListener(delegate { AddTextToQueue(externalInputField.text); });
             }
+
+
             else
             {
                 externalInputField.onValueChanged.AddListener(delegate { AddTextToQueue(externalInputField.text); });
@@ -203,6 +236,26 @@ public class TextToSpeech : MonoBehaviour
 
     private void Update()
     {
+
+
+        if (touch.GetResult() && !touched)
+        {
+            Debug.Log("okkkkk");
+            AddTextToQueue("Don't touch me");
+
+            touched = true;
+        }
+
+
+        if (touched)
+        {
+            touchTimer += UnityEngine.Time.deltaTime;
+            if (touchTimer > delayBetweenTouches)
+            {
+                touchTimer = 0;
+                touched = false;
+            }
+        }
         // If no AudioClip is playing, convert the next text phrase to
         // audio audio if there is any left in the text queue.
         // The new audio clip is placed into the audio queue.
@@ -220,6 +273,8 @@ public class TextToSpeech : MonoBehaviour
         }
 
     }
+
+
 
     // Create the IBM text to speech service
     public IEnumerator CreateService()
@@ -242,7 +297,9 @@ public class TextToSpeech : MonoBehaviour
     {
         Debug.Log("ProcessText");
 
-        string nextText = String.Empty;
+        //string nextText = String.Empty;
+
+        nextText = String.Empty;
 
         audioStatus = ProcessingStatus.Processing;
 
@@ -254,10 +311,82 @@ public class TextToSpeech : MonoBehaviour
         if (textQueue.Count < 1)
         {
             yield return null;
+
         }
         else
         {
             nextText = textQueue.Dequeue();
+            additionalText.text = nextText;
+
+
+            ///////Weather///////
+            
+            if (nextText == "Wait a second...")
+            {
+                AddTextToQueue("Today is " + app.GetWeatherStatus());
+
+            }
+
+            if (nextText.Contains("Today is"))
+            {
+
+                AddTextToQueue("Temperature is " + app.GetTempStatus());
+            }
+            
+            ///////
+           
+
+
+
+
+
+
+            ////////// location////////
+            if (nextText == "Wait a second..")
+            {
+                AddTextToQueue("Your location is " + ip.getLocation());
+
+            }
+
+
+            if (nextText.Contains("Your location is"))
+            {
+                AddTextToQueue("in " + ip.getRegion());
+            }
+
+            ////////////////////////////////////
+
+
+
+
+            ////////// How old are you////////
+            if (nextText == "I am 6 months old.")
+            {
+                AddTextToQueue("I was born in May this year");
+
+            }
+            ////////////////////////////////////
+
+
+
+
+
+
+            ///////////////////////////////////Time//////////////////////////
+            if (nextText == "Wait a second.")
+            {
+                if (DateTime.Now.Hour > 12)
+                {
+                    AddTextToQueue("It is " + app.GetTime() + " PM"); 
+                }
+                else
+                {
+                    AddTextToQueue("It is " + app.GetTime() + " AM");
+                }
+            }
+            //////////////////////////////////////////
+
+
             Debug.Log(nextText);
 
             if (String.IsNullOrEmpty(nextText))
@@ -309,6 +438,7 @@ public class TextToSpeech : MonoBehaviour
     // Add a text sample to the text queue to be converted into audio
     public void AddTextToQueue(string text)
     {
+
         Debug.Log("AddTextToQueue: " + text);
         if (!string.IsNullOrEmpty(text))
         {
@@ -332,6 +462,19 @@ public class TextToSpeech : MonoBehaviour
 
     public bool IsFinished()
     {
-        return !outputAudioSource.isPlaying && audioQueue.Count < 1 && textQueue.Count < 1;
+        return audioStatus != ProcessingStatus.Processing && !oculusLipsyncAudioSource.isPlaying && !outputAudioSource.isPlaying && audioQueue.Count < 1 && textQueue.Count < 1;
+    }
+
+
+    public string GetResult()
+    {
+        audioStatus = ProcessingStatus.Idle;
+        return additionalText.text;
+    }
+
+    public void SetText()
+    {
+
+        additionalText.text += " ";
     }
 }

@@ -1183,6 +1183,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace26c742e68341a58eee79edd0ee986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 0}
+  model: 5
+  spokenText: {fileID: 0}
+  targetInputField: {fileID: 0}
+  targetGameObject: {fileID: 0}
+  outputInputField: {fileID: 0}
+  stt: {fileID: 0}
 --- !u!1 &2463875250584406010
 GameObject:
   m_ObjectHideFlags: 0
