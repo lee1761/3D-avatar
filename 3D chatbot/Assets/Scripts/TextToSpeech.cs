@@ -46,6 +46,9 @@ using System.Security.Cryptography.X509Certificates;
 public class TextToSpeech : MonoBehaviour
 {
 
+    public float loadTime;
+
+
     [SerializeField]
     private Text additionalText;
 
@@ -234,6 +237,11 @@ public class TextToSpeech : MonoBehaviour
         inputField.onValueChanged.AddListener(delegate { AddTextToQueue(inputField.text); });
     }
 
+    private void DelayedStart()
+    {
+        StartCoroutine(routine: ProcessText());
+    }
+
     private void Update()
     {
 
@@ -323,18 +331,24 @@ public class TextToSpeech : MonoBehaviour
             
             if (nextText == "Wait a second...")
             {
+                Invoke(nameof(DelayedStart), loadTime);
+                Invoke(nameof(DelayedStart), loadTime);
+                AddTextToQueue("Temperature is " + app.GetTempStatus());
+                Invoke(nameof(DelayedStart), loadTime);
                 AddTextToQueue("Today is " + app.GetWeatherStatus());
 
             }
 
+            /*
             if (nextText.Contains("Today is"))
             {
-
+                Invoke(nameof(DelayedStart), loadTime);
                 AddTextToQueue("Temperature is " + app.GetTempStatus());
             }
-            
+            */
+
             ///////
-           
+
 
 
 
@@ -344,16 +358,20 @@ public class TextToSpeech : MonoBehaviour
             ////////// location////////
             if (nextText == "Wait a second..")
             {
+                Invoke(nameof(DelayedStart), loadTime);
+                Invoke(nameof(DelayedStart), loadTime);
                 AddTextToQueue("Your location is " + ip.getLocation());
+                Invoke(nameof(DelayedStart), loadTime);
+                AddTextToQueue("in " + ip.getRegion());
 
             }
 
-
+            /*
             if (nextText.Contains("Your location is"))
             {
                 AddTextToQueue("in " + ip.getRegion());
             }
-
+            */
             ////////////////////////////////////
 
 
@@ -375,6 +393,9 @@ public class TextToSpeech : MonoBehaviour
             ///////////////////////////////////Time//////////////////////////
             if (nextText == "Wait a second.")
             {
+
+                Invoke(nameof(DelayedStart), loadTime);
+                Invoke(nameof(DelayedStart), loadTime);
                 if (DateTime.Now.Hour > 12)
                 {
                     AddTextToQueue("It is " + app.GetTime() + " PM"); 
