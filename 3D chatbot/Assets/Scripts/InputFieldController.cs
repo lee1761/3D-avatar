@@ -1,14 +1,4 @@
-﻿/*
- * Copyright 2020 Scott Hwang. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0.
- */
-
-/* Attach this to an InputField. This modifies the behavior such that
- * hitting the return key will send the text to the InputField in a target
- * GameObject. For example, I use this to trigger my TextToSpeech prefab
- * to convert text to audio speech.
- */
-  
+﻿  
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;

@@ -1,26 +1,4 @@
-﻿/* Copyright 2020 Scott Hwang
- * https://www.linkedin.com/in/snhwang
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License./*
- *
- * Modified from code found at github.com:
- * https://gist.github.com/amimaro/10e879ccb54b2cacae4b81abea455b10
- * 
- * Listen at port 3000 for text data to be placed in an InputField.
- * Attach this script to an InputField.
-*/
-
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System;

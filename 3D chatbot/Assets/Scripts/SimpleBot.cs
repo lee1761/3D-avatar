@@ -1,26 +1,3 @@
-/*
- * Copyright 2019 Scott Hwang. All Rights Reserved.
- * This code was modified from ExampleAssistantV2.cs 
- * in unity-sdk-4.0.0. This continues to be licensed 
- * under the Apache License, Version 2.0 as noted below.
- */
-
-/**
-* Copyright 2018 IBM Corp. All Rights Reserved.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*
-*/
 #pragma warning disable 0649
 
 using System;
@@ -72,27 +49,18 @@ public class SimpleBot : MonoBehaviour
 
     private InputField inputField;
 
-    // The output target GameObject to receive text from this gameObject.
     [SerializeField]
     private GameObject targetGameObject;
 
     private void Start()
     {
-        // Enable TLS 1.2
-        //ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
-
-        // Disable old protocols
-        //ServicePointManager.SecurityProtocol &= ~(SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11);
+       
 
         LogSystem.InstallDefaultReactors();
         Runnable.Run(CreateService());
         chatStatus = ProcessingStatus.Idle;
 
-        // Since coroutines can't return values I use the onValueChanged listener
-        // to trigger an action after waiting for an input to arrive.
-        // I originally used enums or flags to keep track if a process such
-        // as obtaining a chat response from IBM Assistant was still being processed
-        // or was finished processing but this was cumbersome.
+       
 
         if (externalInputField != null)
         {

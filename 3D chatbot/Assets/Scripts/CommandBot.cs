@@ -1,37 +1,4 @@
-﻿/*
- * Copyright 2019 Scott Hwang. All Rights Reserved.
- * This code was modified from ExampleAssistantV2.cs 
- * in unity-sdk-4.0.0. This continueds to be licensed 
- * under the Apache License, Version 2.0 as noted below.
- * 
- * I added the Watson text-to-speech service and
- * a flag to communicate with SpeechInput.cs.
- * 
- * I also incorporated the use of the chatbot to execute
- * commands as demonstrated by:
- * 
- * https://www.youtube.com/watch?v=OsbV1xqX0hQ
- * https://github.com/IBM/vr-speech-sandbox-cardboard
- * https://developer.ibm.com/patterns/create-a-virtual-reality-speech-sandbox/
- */
-
-/**
-* Copyright 2018 IBM Corp. All Rights Reserved.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*
-*/
-#pragma warning disable 0649
+﻿#pragma warning disable 0649
 
 using System;
 using System.Collections;
