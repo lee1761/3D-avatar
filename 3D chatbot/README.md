@@ -19,3 +19,7 @@ If the users ask "Hi how are you", It will produce greeting animation and speak 
 If the users ask "Nice to meet you", It will stretch arms and hold on for few soconds.
 Then, the Users could do handshake with the Avatar.
 If the users touch the avatar's body, It will produce protecting animations and speak "Don't touch me".
+
+
+https://user-images.githubusercontent.com/63223218/142800438-fb1fc9e1-eb25-4b36-8a98-b1ad11f158e6.mp4
+
